@@ -1,21 +1,44 @@
 const inquirer = require('inquirer');
 const fs = require('fs');
 
-const generateReadme = ({ pTitle, pMotive, pReason, pProblem, pLearn, pInstall, pUsage, pCollabs, pCredits, pLicense, pBadges, pFeatures, pEmail, pGithub, pWeb, pGithubName, pTest }) =>
+const badgeHandeler = function (pLicense) {
+    
+    if (pLicense === "MIT") {
+        let badge = "[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)"
+        return badge;
+    } else if (pLicense === "IBM V1") {
+        let badge = "[![License: IPL 1.0](https://img.shields.io/badge/License-IPL_1.0-blue.svg)](https://opensource.org/licenses/IPL-1.0)"
+        return badge;
+    } else if (pLicense === "GNU GPL v2") {
+        let badge = "[![License: GPL v2](https://img.shields.io/badge/License-GPL_v2-blue.svg)](https://www.gnu.org/licenses/old-licenses/gpl-2.0.en.html)"
+        return badge;
+    } else if (pLicense === "BSD 2") {
+        let badge = "[![License](https://img.shields.io/badge/License-BSD_2--Clause-orange.svg)](https://opensource.org/licenses/BSD-2-Clause)"
+        return badge;
+    } else {
+        let badge = "[![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)"
+        return badge;
+    }
+}
+const generateReadme = ({ badge, pTitle, pMotive, pReason, pProblems, pLearn, pInstall, pUsage, pCollabs, pCredits, pLicense, pBadges, pFeatures, pEmail, pGithub, pWeb, pGithubName, pTest }) =>
 
     `
-# Project Title ${pTitle}
+# ${pTitle}          <div align="right"> ${badgeHandeler(pLicense)}</div>
+
 
 ## Description
 - Motivation: ${pMotive}
 - Reason: ${pReason}
-- Problem: ${pProblem}
+- Problem: ${pProblems}
 - Learning: ${pLearn}
 
 # Table of contents:
 [Installation](#Installation)
+
 [Usage](#Usage)
+
 [Credits](#Credits)
+
 [License](#License)
 
 ## Installation
@@ -49,6 +72,12 @@ const generateReadme = ({ pTitle, pMotive, pReason, pProblem, pLearn, pInstall, 
 # Testing
 - To test the application: ${pTest}
     `;
+
+
+
+
+
+
 
 
 
@@ -157,29 +186,12 @@ inquirer
             extra: " ",
         },
     ])
-    .then((response) =>
-
+    .then((response) => {
+        
         fs.appendFile(`${response.pTitle}.md`, generateReadme(response), (err) =>
-            err ? console.error(err) : console.log('Commit logged!'))
-
+            err ? console.error(err) : console.log('Commit logged!'));
+    }
     );
 
 
 
-
-if(pLicense = "MIT"){
-   let badge = "[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)"
-
-} else if(pLicense = "IBM V1"){
-   let badge = "[![License: IPL 1.0](https://img.shields.io/badge/License-IPL_1.0-blue.svg)](https://opensource.org/licenses/IPL-1.0)"
-
-} else if(pLicense = "GNU GPL v2"){
-    let badge ="[![License: GPL v2](https://img.shields.io/badge/License-GPL_v2-blue.svg)](https://www.gnu.org/licenses/old-licenses/gpl-2.0.en.html)"
-
-} else if(pLicense = "BSD 2"){
-    let badge = "[![License](https://img.shields.io/badge/License-BSD_2--Clause-orange.svg)](https://opensource.org/licenses/BSD-2-Clause)"
-
-} else {
-    let badge = "[![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)"
-
-}
