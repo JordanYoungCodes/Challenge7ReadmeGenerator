@@ -37,11 +37,11 @@
 
 ## License
 
-M.I.T. license
+- M.I.T. license
 
 ## GitHub
 
-https://github.com/JordanYoungCodes/Challenge7ReadmeGenerator.git
+- https://github.com/JordanYoungCodes/Challenge7ReadmeGenerator.git
 
 ## Video tutorial
 
